@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Redirect default ke login
@@ -14,7 +15,10 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 // SUPER ADMIN
 Route::middleware(['auth', 'role:super-admin'])->group(function () {
     Route::get('/superadmin', fn() => view('pages.superadmin.dashboard'))->name('superadmin.dashboard');
-    Route::get('/superadmin/users', [App\Http\Controllers\UserController::class, 'baca'])->name('superadmin.users');
+    Route::get('/superadmin/users', [UserController::class, 'baca'])->name('superadmin.users');
+    Route::get('/superadmin/users/create', [UserController::class, 'create'])->name('superadmin.users.create');
+    Route::post('/superadmin/users', [UserController::class, 'store'])->name('superadmin.users.store');
+
 }); 
 
 // ACCOUNTING

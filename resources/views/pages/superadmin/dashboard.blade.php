@@ -7,7 +7,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 
     {{-- CARD: Welcome --}}
-    <div class="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-300 to-indigo-500 rounded-xl shadow-lg p-6 flex items-center gap-5 text-white">
+    <div class="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-xl shadow-lg p-6 flex items-center gap-5 text-white">
         <div class="w-20 h-20 flex items-center justify-center bg-white/20 backdrop-blur-md text-3xl font-bold rounded-full shadow-inner">
             {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
         </div>
