@@ -14,7 +14,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 // SUPER ADMIN
 Route::middleware(['auth', 'role:super-admin'])->group(function () {
     Route::get('/superadmin', fn() => view('pages.superadmin.dashboard'))->name('superadmin.dashboard');
-});
+    Route::get('/superadmin/users', [App\Http\Controllers\UserController::class, 'baca'])->name('superadmin.users');
+}); 
 
 // ACCOUNTING
 Route::middleware(['auth', 'role:accounting'])->group(function () {
@@ -35,3 +36,5 @@ Route::middleware(['auth', 'role:hrd'])->group(function () {
 Route::middleware(['auth', 'role:employee'])->group(function () {
     Route::get('/employee', fn() => view('employee.dashboard'))->name('employee.dashboard');
 });
+
+
