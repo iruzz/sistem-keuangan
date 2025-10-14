@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\KategoriTsController;
 
 // Redirect default ke login
 Route::get('/', fn() => redirect('/login'));
@@ -32,6 +33,13 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
     Route::get('/superadmin/akun/{id}/edit', [AkunController::class, 'edit'])->name('superadmin.akun.edit');
     Route::put('/superadmin/akun/{id}', [AkunController::class, 'update'])->name('superadmin.akun.update');
     Route::delete('/superadmin/akun/{id}', [AkunController::class, 'destroy'])->name('superadmin.akun.destroy');
+
+    Route::resource('/superadmin/kategori-transaksi', KategoriTsController::class)->names([
+    'index' => 'superadmin.kategori',
+    'create' => 'superadmin.kategori.create',
+    'store' => 'superadmin.kategori.store',
+]);
+
 }); 
 
 // BENDAHARA
