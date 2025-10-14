@@ -5,6 +5,25 @@
 
 @section('content')
 <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md border border-gray-100">
+
+    {{-- ✅ Tampilkan error validasi --}}
+    @if ($errors->any())
+        <div class="bg-red-100 text-red-700 p-3 rounded-lg mb-4">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    {{-- ✅ Tampilkan pesan sukses --}}
+    @if (session('success'))
+        <div class="bg-green-100 text-green-700 p-3 rounded-lg mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <form action="{{ route('superadmin.users.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
 
@@ -44,12 +63,6 @@
                     <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
                 @endforeach
             </select>
-        </div>
-
-        <div>
-            <label class="block text-sm font-semibold text-gray-700">Foto (Opsional)</label>
-            <input type="file" name="foto" accept="image/*"
-                class="w-full border border-gray-300 rounded-lg p-2 focus:ring-indigo-500 focus:border-indigo-500">
         </div>
 
         <div class="flex justify-end gap-3">

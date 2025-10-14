@@ -82,27 +82,7 @@
       class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0">
       <div class="h-full px-4 pb-4 overflow-y-auto">
          <ul class="space-y-2 font-medium">
-            <li>
-               <a href="{{ route('superadmin.dashboard')}}"
-                  class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
-                  <i class="fa-solid fa-house w-5 text-gray-500 group-hover:text-blue-600"></i>
-                  <span class="ms-3 font-medium">Dashboard</span>
-               </a>
-            </li>
-            <li>
-               <a href="#"
-                  class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
-                  <i class="fa-solid fa-box w-5 text-gray-500 group-hover:text-blue-600"></i>
-                  <span class="ms-3 font-medium">Products</span>
-               </a>
-            </li>
-            <li>
-               <a href="{{ route('superadmin.users')}}"
-                  class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
-                  <i class="fa-solid fa-user w-5 text-gray-500 group-hover:text-blue-600"></i>
-                  <span class="ms-3 font-medium">Users</span>
-               </a>
-            </li>
+           @yield('sidebar')
          </ul>
       </div>
    </aside>

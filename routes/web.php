@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\AkunController;
 
 // Redirect default ke login
 Route::get('/', fn() => redirect('/login'));
@@ -15,30 +16,35 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 // SUPER ADMIN
 Route::middleware(['auth', 'role:super-admin'])->group(function () {
     Route::get('/superadmin', fn() => view('pages.superadmin.dashboard'))->name('superadmin.dashboard');
+
+    // USER
     Route::get('/superadmin/users', [UserController::class, 'baca'])->name('superadmin.users');
     Route::get('/superadmin/users/create', [UserController::class, 'create'])->name('superadmin.users.create');
     Route::post('/superadmin/users', [UserController::class, 'store'])->name('superadmin.users.store');
+    Route::get('/superadmin/users/{id}/edit', [UserController::class, 'edit'])->name('superadmin.users.edit');
+    Route::put('/superadmin/users/{id}', [UserController::class, 'update'])->name('superadmin.users.update');
+    Route::delete('/superadmin/users/{id}', [UserController::class, 'destroy'])->name('superadmin.users.destroy');
 
+    // AKUN 
+    Route::get('/superadmin/akun', [AkunController::class, 'index'])->name('superadmin.akun');
+    Route::get('/superadmin/akun/create', [AkunController::class, 'create'])->name('superadmin.akun.create');
+    Route::post('/superadmin/akun', [AkunController::class, 'store'])->name('superadmin.akun.store');
+    Route::get('/superadmin/akun/{id}/edit', [AkunController::class, 'edit'])->name('superadmin.akun.edit');
+    Route::put('/superadmin/akun/{id}', [AkunController::class, 'update'])->name('superadmin.akun.update');
+    Route::delete('/superadmin/akun/{id}', [AkunController::class, 'destroy'])->name('superadmin.akun.destroy');
 }); 
 
-// ACCOUNTING
-Route::middleware(['auth', 'role:accounting'])->group(function () {
-    Route::get('/accounting', fn() => view('pages.accounting.dashboard'))->name('accounting.dashboard');
+// BENDAHARA
+Route::middleware(['auth', 'role:bendahara'])->group(function () {
+    Route::get('/bendahara', fn() => view('pages.bendahara.dashboard'))
+        ->name('bendahara.dashboard');
 });
+
 
 // FINANCE
-Route::middleware(['auth', 'role:finance'])->group(function () {
-    Route::get('/finance', fn() => view('finance.dashboard'))->name('finance.dashboard');
+Route::middleware(['auth', 'role:keuangan'])->group(function () {
+    Route::get('/keuangan', fn() => view('pages.keuangan.dashboard'))->name('keuangan.dashboard');
 });
 
-// HRD
-Route::middleware(['auth', 'role:hrd'])->group(function () {
-    Route::get('/hrd', fn() => view('hrd.dashboard'))->name('hrd.dashboard');
-});
-
-// EMPLOYEE
-Route::middleware(['auth', 'role:employee'])->group(function () {
-    Route::get('/employee', fn() => view('employee.dashboard'))->name('employee.dashboard');
-});
 
 

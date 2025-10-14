@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
-@section('title', 'Manajemen Pengguna')
-@section('page-title', 'Daftar Pengguna')
+@section('title', 'Manajemen Akun Keuangan')
+@section('page-title', 'Daftar Akun')
 
 @section('sidebar')
          <li>
@@ -31,7 +31,7 @@
 <div class="relative overflow-x-auto bg-white shadow-md rounded-xl border border-gray-100">
     {{-- Header --}}
  <div class="flex items-center justify-between flex-wrap gap-4 px-4 py-3 border-b border-gray-100">
-    <h2 class="text-lg font-semibold text-gray-800">Daftar User</h2>
+    <h2 class="text-lg font-semibold text-gray-800">Daftar Akun</h2>
 
     <div class="flex items-center gap-3">
         {{-- Search --}}
@@ -49,7 +49,7 @@
         </div>
 
         {{-- Tombol Tambah --}}
-        <a href="{{ route('superadmin.users.create') }}"
+        <a href="{{ route('superadmin.akun.create') }}"
            class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition">
             <i class="fas fa-plus"></i> Tambah
         </a>
@@ -61,9 +61,10 @@
     <table class="w-full text-sm text-left text-gray-600">
         <thead class="text-xs text-gray-500 uppercase bg-gray-50 border-b border-gray-100">
             <tr>
-                <th class="px-6 py-3 font-semibold">Name</th>
-                <th class="px-6 py-3 font-semibold">Email</th>
-                <th class="px-6 py-3 font-semibold">Role</th>
+                <th class="px-6 py-3 font-semibold">Kode AKun</th>
+                <th class="px-6 py-3 font-semibold">Nama Akun</th>
+                <th class="px-6 py-3 font-semibold">Jenis</th>
+                <th class="px-6 py-3 font-semibold">Saldo Awal</th>
                 <th class="px-6 py-3 font-semibold text-center">Action</th>
             </tr>
         </thead>
@@ -73,31 +74,27 @@
             <tr class="bg-white border-b border-gray-100 hover:bg-gray-50 transition">
                 {{-- Nama dan Email --}}
                 <th scope="row" class="flex items-center px-6 py-4 whitespace-nowrap">
-                  <div class="w-10 h-10 flex items-center justify-center 
-                        bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 
-                        text-white text-md font-bold rounded-full shadow-lg 
-                        backdrop-blur-md ring-2 ring-white/30 transition-transform transform hover:scale-105">
-                            {{ strtoupper(substr($user->name, 0, 2)) }}
-                  </div>
+                  
 
                     <div class="pl-3">
-                        <div class="text-base font-semibold text-gray-800">{{ $user->name }}</div>
-                        <div class="text-gray-500 text-sm">{{ $user->email }}</div>
+                        <div class="text-base font-semibold text-gray-800">{{ $user->kode_akun }}</div>
                     </div>
                 </th>
 
-                {{-- Role --}}
-                <td class="px-6 py-4">{{ $user->email }}</td>
-                <td class="px-6 py-4">{{ $user->getRoleNames()->join(', ') ?: '-' }}</td>
+              
+                <td class="px-6 py-4">{{ $user->nama_akun }}</td>
+                <td class="px-6 py-4">{{ $user->jenis }}</td>
+                <td class="px-6 py-4">Rp. {{ number_format($user->saldo_awal, 0, '', '') }}</td>
+
 
                 {{-- Action --}}
                 <td class="px-6 py-4 text-center space-x-3">
-                    <a href="{{ route('superadmin.users.edit', $user->id) }}"
+                    <a href="{{ route('superadmin.akun.edit', $user->id) }}"
                         class="inline-block text-indigo-600 hover:text-indigo-800 font-medium hover:underline transition">
                         <i class="fas fa-edit"></i> Edit
                     </a>
 
-                     <form action="{{ route('superadmin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus {{ $user->name }}?')" class="inline">
+                     <form action="{{ route('superadmin.akun.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus {{ $user->name }}?')" class="inline">
     @csrf
     @method('DELETE')
     <button type="submit" class="text-red-600 hover:text-red-800 font-medium hover:underline transition">

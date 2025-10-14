@@ -5,53 +5,36 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Data user dan role masing-masing
+        // Pastikan role sudah ada
+        $role = Role::firstOrCreate(['name' => 'super-admin']);
+
+        // Data user
         $users = [
             [
-                'name'  => 'Super Admin',
-                'email' => 'superadmin@example.com',
+                'name'  => 'iruzz',
+                'email' => 'ruzz@gmail.com',
+                'password' => Hash::make('12345'),
                 'role'  => 'super-admin',
-            ],
-            [
-                'name'  => 'Accounting',
-                'email' => 'accounting@example.com',
-                'role'  => 'accounting',
-            ],
-            [
-                'name'  => 'Finance',
-                'email' => 'finance@example.com',
-                'role'  => 'finance',
-            ],
-            [
-                'name'  => 'HRD',
-                'email' => 'hrd@example.com',
-                'role'  => 'hrd',
-            ],
-            [
-                'name'  => 'Employee',
-                'email' => 'employee@example.com',
-                'role'  => 'employee',
             ],
         ];
 
-        // Loop setiap data user
+        // Loop simpan user ke database
         foreach ($users as $data) {
             $user = User::firstOrCreate(
+                ['email' => $data['email']], // kalau email sudah ada, gak buat baru
                 [
-                    'email' => $data['email']
-                ],
-                [
-                    'name'     => $data['name'],
-                    'password' => Hash::make('password'), // Password default
+                    'name' => $data['name'],
+                    'password' => $data['password'],
                 ]
             );
 
-            // Assign role ke user
+            // Assign role-nya (pastikan Spatie Permission sudah di-setup)
             $user->assignRole($data['role']);
         }
     }
