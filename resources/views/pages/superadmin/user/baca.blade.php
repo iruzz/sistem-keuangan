@@ -29,7 +29,7 @@
    </li>
 
    <li>
-      <a href=""
+      <a href="{{route('superadmin.kategori')}}"
          class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
          <i class="fa-solid fa-tags w-5 text-gray-500 group-hover:text-blue-600"></i>
          <span class="ms-3 font-medium">Kategori Transaksi</span>
@@ -45,6 +45,23 @@
     <h2 class="text-lg font-semibold text-gray-800">Daftar User</h2>
 
     <div class="flex items-center gap-3">
+         <div class="flex items-center gap-3">
+        {{-- Search --}}
+        <form method="GET" action="{{ route('superadmin.users') }}" class="relative">
+            <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <!-- svg -->
+            </div>
+            <input type="text" name="q" id="table-search-users"
+                value="{{ request('q') }}"
+                class="block w-72 p-2 pl-9 text-sm text-gray-700 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                placeholder="Cari pengguna...">
+        </form>
+        {{-- Tombol Tambah --}}
+        <a href="{{ route('superadmin.users.create') }}"
+           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition">
+            <i class="fas fa-plus"></i> Tambah
+        </a>
+    </div>
         {{-- Search --}}
         <div class="relative">
             <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">

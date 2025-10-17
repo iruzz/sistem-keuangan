@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
-@section('title', 'Edit Akun Keuangan')
-@section('page-title', 'Edit Akun Keuangan')
+@section('title', 'Kategori Transaksi')
+@section('page-title', 'Edit Kategori')
 
 @section('sidebar')
    <li>
@@ -39,67 +39,46 @@
 
 @section('content')
 <div class="max-w-2xl mx-auto bg-white shadow-md rounded-xl border border-gray-100 p-6 mt-6">
-    <h2 class="text-xl font-semibold text-gray-800 mb-6">Edit Data Akun Keuangan</h2>
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">Edit Kategori Transaksi</h2>
 
-    <form action="{{ route('superadmin.akun.update', $akun->id) }}" method="POST" class="space-y-5">
+    <form action="{{ route('superadmin.kategori.update', $kategori->id) }}" method="POST" class="space-y-5">
         @csrf
         @method('PUT')
 
-        {{-- Kode Akun --}}
-        <div>
-            <label for="kode_akun" class="block text-sm font-medium text-gray-700 mb-1">Kode Akun</label>
-            <input type="text" name="kode_akun" id="kode_akun"
-                   value="{{ old('kode_akun', $akun->kode_akun) }}"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                   required>
-            @error('kode_akun')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+
 
         {{-- Nama Akun --}}
         <div>
-            <label for="nama_akun" class="block text-sm font-medium text-gray-700 mb-1">Nama Akun</label>
-            <input type="text" name="nama_akun" id="nama_akun"
-                   value="{{ old('nama_akun', $akun->nama_akun) }}"
+            <label for="nama_kategori" class="block text-sm font-medium text-gray-700 mb-1">Nama Kategori</label>
+            <input type="text" name="nama_kategori" id="nama_kategori"
+                   value="{{ old('nama_kategori', $kategori->nama_kategori) }}"
                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                    required>
-            @error('nama_akun')
+            @error('nama_kategori')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
 
         {{-- Jenis Akun --}}
         <div>
-            <label for="jenis" class="block text-sm font-medium text-gray-700 mb-2">Jenis Akun</label>
-            <select name="jenis" id="jenis" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-indigo-500 focus:border-indigo-500" required>
-                <option value="">-- Pilih Jenis Akun --</option>
-                @foreach (['Aset', 'Kewajiban', 'Modal', 'Pendapatan', 'Beban'] as $jenis)
-                    <option value="{{ $jenis }}" {{ old('jenis', $akun->jenis) == $jenis ? 'selected' : '' }}>
-                        {{ $jenis }}
+            <label for="tipe" class="block text-sm font-medium text-gray-700 mb-2">Jenis Kategori</label>
+            <select name="tipe" id="tipe" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                <option value="">-- Pilih Tipe Transaksi --</option>
+                @foreach (['Pemasukan', 'Pengeluaran'] as $tipe)
+                    <option value="{{ $tipe }}" {{ old('tipe', $kategori->tipe) == $tipe ? 'selected' : '' }}>
+                        {{ $tipe }}
                     </option>
                 @endforeach
             </select>
-            @error('jenis')
+            @error('tipe')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        {{-- Saldo Awal --}}
-        <div>
-            <label for="saldo_awal" class="block text-sm font-medium text-gray-700 mb-1">Saldo Awal</label>
-            <input type="number" step="0.01" name="saldo_awal" id="saldo_awal"
-                   value="{{ old('saldo_awal', $akun->saldo_awal) }}"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                   required>
-            @error('saldo_awal')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div>
 
         {{-- Tombol --}}
         <div class="flex justify-between items-center pt-4">
-            <a href="{{ route('superadmin.akun') }}"
+            <a href="{{ route('superadmin.kategori') }}"
                class="px-5 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 transition font-medium">
                 Batal
             </a>

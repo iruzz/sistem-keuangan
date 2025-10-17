@@ -3,6 +3,40 @@
 @section('title', 'Tambah User')
 @section('page-title', 'Tambah User Baru')
 
+@section('sidebar')
+   <li>
+      <a href="{{ route('superadmin.dashboard') }}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-house w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Dashboard</span>
+      </a>
+   </li>
+
+   <li>
+      <a href="{{ route('superadmin.users') }}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-user w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Users</span>
+      </a>
+   </li>
+
+   <li>
+      <a href="{{ route('superadmin.akun') }}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-wallet w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Akun Keuangan</span>
+      </a>
+   </li>
+
+   <li>
+      <a href="{{route('superadmin.kategori')}}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-tags w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Kategori Transaksi</span>
+      </a>
+   </li>
+@endsection
+
 @section('content')
 <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md border border-gray-100">
 

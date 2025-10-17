@@ -37,6 +37,9 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
     Route::resource('/superadmin/kategori-transaksi', KategoriTsController::class)->names([
     'index' => 'superadmin.kategori',
     'create' => 'superadmin.kategori.create',
+    'edit' => 'superadmin.kategori.edit',
+    'update' => 'superadmin.kategori.update',
+    'destroy' => 'superadmin.kategori.destroy',
     'store' => 'superadmin.kategori.store',
 ]);
 

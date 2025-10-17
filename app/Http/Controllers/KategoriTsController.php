@@ -21,7 +21,7 @@ class KategoriTsController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.superadmin.kategorits.create');
     }
 
     /**
@@ -29,7 +29,15 @@ class KategoriTsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama_kategori' => 'required|string|max:255',
+            'tipe'         => 'required|in:Pemasukan,Pengeluaran',
+        ]);
+
+        KategoriTs::create($validated);
+
+        return redirect()->route('superadmin.kategori')
+            ->with('success', 'Kategori transaksi berhasil ditambahkan!');
     }
 
     /**
@@ -45,7 +53,8 @@ class KategoriTsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kategori = KategoriTs::findOrFail($id);
+        return view('pages.superadmin.kategorits.edit', compact('kategori'));
     }
 
     /**
@@ -53,7 +62,16 @@ class KategoriTsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $kategori = KategoriTs::findOrFail($id);
+
+        $validated = $request->validate([
+            'nama_kategori'  => 'required|string|max:255',
+            'tipe'      => 'required|in:Pemasukan,Pengeluaran',
+        ]);
+
+        $kategori->update($validated);
+
+        return redirect()->route('superadmin.kategori');
     }
 
     /**
@@ -61,6 +79,10 @@ class KategoriTsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kategori = KategoriTs::findOrFail($id);
+        $kategori->delete();
+
+        return redirect()->route('superadmin.kategori')
+            ->with('success', 'Kategori transaksi berhasil dihapus!');
     }
 }

@@ -57,39 +57,30 @@
         </div>
     @endif
 
-    <form action="{{ route('superadmin.akun.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+    <form action="{{ route('superadmin.kategori.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
-         <label class="block text-sm font-semibold text-gray-700">Kode Akun</label>
-        <input type="text" name="kode_akun" value="{{ old('kode_akun') }}"
+         <label class="block text-sm font-semibold text-gray-700">Nama Kategori</label>
+        <input type="text" name="nama_kategori" value="{{ old('nama_kategori') }}"
     class="w-full border border-gray-300 rounded-lg p-2 focus:ring-indigo-500 focus:border-indigo-500"
     required>
 
-
-        <div>
-            <label class="block text-sm font-semibold text-gray-700">Nama Akun</label>
-            <input type="text" name="nama_akun" value="{{ old('nama_akun') }}"
-                class="w-full border border-gray-300 rounded-lg p-2 focus:ring-indigo-500 focus:border-indigo-500"
-                required>
-        </div>
-        
                <div class="mb-4">
-    <label for="jenis" class="block text-sm font-medium text-gray-700 mb-2">Jenis Akun</label>
-    <select name="jenis" id="jenis" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-indigo-500 focus:border-indigo-500" required>
-        <option value="">-- Pilih Jenis Akun --</option>
-        <option value="Aset" {{ old('jenis', $akun->jenis ?? '') == 'Aset' ? 'selected' : '' }}>Aset</option>
-        <option value="Kewajiban" {{ old('jenis', $akun->jenis ?? '') == 'Kewajiban' ? 'selected' : '' }}>Kewajiban</option>
-        <option value="Modal" {{ old('jenis', $akun->jenis ?? '') == 'Modal' ? 'selected' : '' }}>Modal</option>
-        <option value="Pendapatan" {{ old('jenis', $akun->jenis ?? '') == 'Pendapatan' ? 'selected' : '' }}>Pendapatan</option>
-        <option value="Beban" {{ old('jenis', $akun->jenis ?? '') == 'Beban' ? 'selected' : '' }}>Beban</option>
-    </select>
+    <label for="tipe" class="block text-sm font-medium text-gray-700 mb-2">Jenis Akun</label>
+   <select name="tipe" id="tipe"
+    class="w-full border border-gray-300 rounded-lg p-2 focus:ring-indigo-500 focus:border-indigo-500"
+    required>
+    <option value="">-- Pilih Jenis Transaksi --</option>
+    <option value="Pemasukan" {{ old('tipe', $kategori->tipe ?? '') == 'Pemasukan' ? 'selected' : '' }}>
+        Pemasukan
+    </option>
+    <option value="Pengeluaran" {{ old('tipe', $kategori->tipe ?? '') == 'Pengeluaran' ? 'selected' : '' }}>
+        Pengeluaran
+    </option>
+</select>
+
 </div>
 
-        <div>
-            <label class="block text-sm font-semibold text-gray-700">Saldo Awal</label>
-            <input type="number" name="saldo_awal" value="{{ old('saldo_awal') }}"
-                class="w-full border border-gray-300 rounded-lg p-2 focus:ring-indigo-500 focus:border-indigo-500"
-                required>
-        </div>
+       
 
 
         <div class="flex justify-end gap-3">

@@ -1,37 +1,47 @@
 @extends('layouts.navbar')
 
-@section('title', 'Manajemen Akun Keuangan')
-@section('page-title', 'Daftar Akun')
+@section('title', 'Manajemen Kategori Transaksi')
+@section('page-title', 'Daftar Kategori Transaksi')
 
 @section('sidebar')
-         <li>
-               <a href="{{ route('superadmin.dashboard')}}"
-                  class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
-                  <i class="fa-solid fa-house w-5 text-gray-500 group-hover:text-blue-600"></i>
-                  <span class="ms-3 font-medium">Dashboard</span>
-               </a>
-            </li>
-               <a href="{{ route('superadmin.users')}}"
-                  class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
-                  <i class="fa-solid fa-user w-5 text-gray-500 group-hover:text-blue-600"></i>
-                  <span class="ms-3 font-medium">Users</span>
-               </a>
-            </li>
-              </li>
-               <a href="{{ route('superadmin.akun')}}"
-                  class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
-                  <i class="fa-solid fa-user w-5 text-gray-500 group-hover:text-blue-600"></i>
-                  <span class="ms-3 font-medium">Akun Keuangan</span>
-               </a>
-            </li>
+   <li>
+      <a href="{{ route('superadmin.dashboard') }}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-house w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Dashboard</span>
+      </a>
+   </li>
 
+   <li>
+      <a href="{{ route('superadmin.users') }}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-user w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Users</span>
+      </a>
+   </li>
+
+   <li>
+      <a href="{{ route('superadmin.akun') }}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-wallet w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Akun Keuangan</span>
+      </a>
+   </li>
+
+   <li>
+      <a href="{{route('superadmin.kategori')}}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-tags w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Kategori Transaksi</span>
+      </a>
+   </li>
 @endsection
 
 @section('content')
 <div class="relative overflow-x-auto bg-white shadow-md rounded-xl border border-gray-100">
     {{-- Header --}}
  <div class="flex items-center justify-between flex-wrap gap-4 px-4 py-3 border-b border-gray-100">
-    <h2 class="text-lg font-semibold text-gray-800">Daftar Akun</h2>
+    <h2 class="text-lg font-semibold text-gray-800">Daftar Kategori</h2>
 
     <div class="flex items-center gap-3">
         {{-- Search --}}
@@ -49,7 +59,7 @@
         </div>
 
         {{-- Tombol Tambah --}}
-        <a href="{{ route('superadmin.akun.create') }}"
+        <a href="{{ route('superadmin.kategori.create') }}"
            class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition">
             <i class="fas fa-plus"></i> Tambah
         </a>
@@ -79,12 +89,12 @@
 
                 {{-- Action --}}
                 <td class="px-6 py-4 text-center space-x-3">
-                    <a href="{{ route('superadmin.akun.edit', $kategori->id) }}"
+                    <a href="{{ route('superadmin.kategori.edit', $kategori->id) }}"
                         class="inline-block text-indigo-600 hover:text-indigo-800 font-medium hover:underline transition">
                         <i class="fas fa-edit"></i> Edit
                     </a>
 
-                     <form action="{{ route('superadmin.akun.destroy', $kategori->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus {{ $user->name }}?')" class="inline">
+                     <form action="{{ route('superadmin.kategori.destroy', $kategori->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus {{ $kategori->name }}?')" class="inline">
     @csrf
     @method('DELETE')
     <button type="submit" class="text-red-600 hover:text-red-800 font-medium hover:underline transition">
