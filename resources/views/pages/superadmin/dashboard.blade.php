@@ -99,7 +99,7 @@
         <div>
             <p class="text-gray-500 dark:text-gray-700 text-sm">Total Akun Keuangan</p>
             <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-700">
-                
+                {{ \App\Models\KategoriTs::count() }}
             </h3>
         </div>
     </div>

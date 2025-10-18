@@ -45,10 +45,12 @@
                {{-- User Dropdown --}}
                <div class="relative">
                   <button type="button"
-                     class="flex items-center gap-2 text-sm rounded-full focus:ring-4 focus:ring-blue-100"
+                     class="flex items-center gap-2 text-sm rounded-full focus:ring-4 focus:ring-blue-100 "
                      aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                     <img class="w-9 h-9 rounded-full border border-gray-200"
-                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-400 to-indigo-500 flex items-center justify-center bg-white/20 backdrop-blur-md text-md font-bold rounded-full text-white shadow-inner">
+                        {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                      </div> 
+                      
                      <span class="hidden sm:block text-gray-800 font-semibold">{{ Auth::user()->name }}</span>
                   </button>
 

@@ -51,30 +51,12 @@
             <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                 <!-- svg -->
             </div>
-            <input type="text" name="q" id="table-search-users"
+            <input type="text" name="q" 
                 value="{{ request('q') }}"
                 class="block w-72 p-2 pl-9 text-sm text-gray-700 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                 placeholder="Cari pengguna...">
         </form>
-        {{-- Tombol Tambah --}}
-        <a href="{{ route('superadmin.users.create') }}"
-           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition">
-            <i class="fas fa-plus"></i> Tambah
-        </a>
-    </div>
-        {{-- Search --}}
-        <div class="relative">
-            <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                </svg>
-            </div>
-            <input type="text" id="table-search-users"
-                class="block w-72 p-2 pl-9 text-sm text-gray-700 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                placeholder="Cari pengguna...">
-        </div>
+      
 
         {{-- Tombol Tambah --}}
         <a href="{{ route('superadmin.users.create') }}"
@@ -148,5 +130,15 @@
             alert('Fitur delete belum diaktifkan untuk ID ' + id);
         }
     }
+
+    (function(){
+        const input = document.getElementById('table-search-users');
+        if (!input) return;
+        let t;
+        input.addEventListener('input', function(){
+            clearTimeout(t);
+            t = setTimeout(()=> input.form.submit(), 500);
+        });
+    })();
 </script>
 @endsection

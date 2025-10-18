@@ -9,12 +9,24 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+// ...existing code...
     // 📖 Tampil semua user
-    public function baca()
+   public function baca(Request $request)
     {
-        $data = User::with('roles')->get();
+        $q = $request->q;
+
+        $data = User::when($q, function ($query, $q) {
+            $query->where('name', 'like', "%{$q}%")
+                  ->orWhere('email', 'like', "%{$q}%");
+        })
+        ->orderBy('name')
+        ->paginate(10)
+        ->withQueryString();
+
         return view('pages.superadmin.user.baca', compact('data'));
     }
+
+// ...existing code...
 
     // ➕ Form tambah user
     public function create()

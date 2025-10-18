@@ -42,6 +42,9 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
     'destroy' => 'superadmin.kategori.destroy',
     'store' => 'superadmin.kategori.store',
 ]);
+    Route::get('/superadmin/kategori-transaksi/search', [App\Http\Controllers\KategoriTsController::class, 'search'])
+    ->name('superadmin.users.search');
+
 
 }); 
 
