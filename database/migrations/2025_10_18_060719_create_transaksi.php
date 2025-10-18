@@ -13,7 +13,19 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_transaksi', 20)->unique();
+            $table->datetime('tanggal');
+            $table->string('deskripsi');
+            $table->enum('tipe', ['Pemasukan', 'Pengeluaran']);
+            $table->decimal('total', 15, 2);
+            $table->enum('metode', ['Tunai', 'Transfer']);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
+
+            $table->index(['tanggal']);
+            $table->index(['tipe']);
+            $table->index(['user_id']);
+            
         });
     }
 

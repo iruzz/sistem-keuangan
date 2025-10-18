@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\KategoriTsController;
 
 // Redirect default ke login
@@ -52,6 +53,14 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
 Route::middleware(['auth', 'role:bendahara'])->group(function () {
     Route::get('/bendahara', fn() => view('pages.bendahara.dashboard'))
         ->name('bendahara.dashboard');
+
+      Route::resource('/bendahara/transaksi', TransaksiController::class)->names([
+        'index' => 'bendahara.transaksi',
+        'create' => 'bendahara.transaksi.create',
+        'edit' => 'bendahara.transaksi.edit',
+        'update' => 'bendahara.transaksi.update',
+        'destroy' => 'bendahara.transaksi.destroy',
+]);
 });
 
 

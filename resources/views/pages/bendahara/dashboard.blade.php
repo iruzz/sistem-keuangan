@@ -2,6 +2,23 @@
 
 @section('title', 'Dashboard Bendahara')
 
+@section('sidebar')
+   <li>
+      <a href="{{ route('bendahara.dashboard') }}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-house w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Dashboard</span>
+      </a>
+   </li>
+
+   <li>
+      <a href="{{ route('bendahara.transaksi') }}"
+         class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 group">
+         <i class="fa-solid fa-receipt w-5 text-gray-500 group-hover:text-blue-600"></i>
+         <span class="ms-3 font-medium">Transaksi</span>
+      </a>
+   </li>
+@endsection
 @section('content')
 <div class="space-y-6">
     <!-- Stats Overview Widgets (Filament-style) -->
