@@ -9,6 +9,7 @@ export default {
         './resources/**/*.js',
         './resources/**/*.vue',
         './node_modules/flowbite/**/*.js',
+         './node_modules/flowbite-charts/**/*.js',
     ],
     theme: {
         extend: {
@@ -17,5 +18,11 @@ export default {
             },
         },
     },
-    plugins: [forms, flowbite],
+    plugins: [
+        forms,
+        flowbite({
+            charts: true, // ⬅️ aktifkan mode chart Flowbite (pakai ApexCharts)
+        }),
+    ],
+
 }

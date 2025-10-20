@@ -15,6 +15,9 @@
    <style>
       * { transition: all 0.2s ease-in-out; }
    </style>
+
+   @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body class="bg-gray-50 text-gray-900">
@@ -95,5 +98,8 @@
          @yield('content')
       </div>
    </main>
+
+
+
 </body>
 </html>

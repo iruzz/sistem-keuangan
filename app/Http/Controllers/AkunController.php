@@ -11,6 +11,7 @@ class AkunController extends Controller
     public function index()
     {
         $data = Akun::all();
+
         return view('pages.superadmin.akun.index', compact('data'));
     }
 

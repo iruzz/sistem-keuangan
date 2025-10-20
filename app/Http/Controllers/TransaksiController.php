@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Transaksi;
 
 
@@ -23,7 +24,8 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        
+        $users = User::all();
+        return view('pages.bendahara.transaksi.create', compact('users'));
     }
 
     /**
@@ -31,7 +33,17 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         Transaksi::create([
+            'kode_transaksi' => $request->kode_transaksi,
+            'tanggal' => date('Y-m-d'),
+            'deskripsi' => $request->deskripsi,
+            'tipe' => $request->tipe,
+            'total' => $request->total,
+            'metode' => $request->metode,
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect('/bendahara/transaksi')->with('success', 'Transaksi berhasil ditambahkan!');
     }
 
     /**
@@ -47,22 +59,37 @@ class TransaksiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id);
+        return view('pages.bendahara.transaksi.edit', compact('transaksi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function update(Request $request, $id)
+{
+    $transaksi = Transaksi::find($id);
+
+    $transaksi->kode_transaksi = $request->kode_transaksi;
+    $transaksi->tanggal = $request->tanggal ?: now()->toDateString(); // ← otomatis isi tanggal hari ini
+    $transaksi->deskripsi = $request->deskripsi;
+    $transaksi->tipe = $request->tipe;
+    $transaksi->total = $request->total;
+    $transaksi->metode = $request->metode;
+
+    $transaksi->save();
+
+    return redirect()->route('bendahara.transaksi')->with('success', 'Data berhasil diupdate!');
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->delete();
+        return redirect()->route('bendahara.transaksi');
     }
 }

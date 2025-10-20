@@ -5,6 +5,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\DetailTsController;
+use App\Http\Controllers\KasBankController;
+use App\Http\Controllers\BendaharaDashboard;
 use App\Http\Controllers\KategoriTsController;
 
 // Redirect default ke login
@@ -51,16 +54,43 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
 
 // BENDAHARA
 Route::middleware(['auth', 'role:bendahara'])->group(function () {
-    Route::get('/bendahara', fn() => view('pages.bendahara.dashboard'))
-        ->name('bendahara.dashboard');
+   Route::get('/bendahara/dashboard', [BendaharaDashboard::class, 'dashboard'])->name('bendahara.dashboard');
+    // routes/web.php
 
-      Route::resource('/bendahara/transaksi', TransaksiController::class)->names([
+// Bendahara (Read Only - Akun)
+Route::prefix('bendahara')->group(function () {
+    Route::get('/akun', [AkunController::class, 'index'])->name('bendahara.akun');
+});
+
+    Route::resource('/bendahara/transaksi', TransaksiController::class)->names([
         'index' => 'bendahara.transaksi',
         'create' => 'bendahara.transaksi.create',
+        'store' => 'bendahara.transaksi.store',
         'edit' => 'bendahara.transaksi.edit',
         'update' => 'bendahara.transaksi.update',
         'destroy' => 'bendahara.transaksi.destroy',
-]);
+    ]);
+      
+    Route::resource('/bendahara/detail-transaksi', DetailTsController::class)->names([
+         'index' => 'bendahara.detailTs',
+        'create' => 'bendahara.detailTs.create',
+        'store' => 'bendahara.detailTs.store',
+        'edit' => 'bendahara.detailTs.edit',
+        'update' => 'bendahara.detailTs.update',
+        'destroy' => 'bendahara.detailTs.destroy',
+    ]);
+
+     Route::prefix('bendahara')->group(function () {
+    Route::resource('kas-bank', KasBankController::class)->names([
+        'index' => 'bendahara.kasBank',
+        'create' => 'bendahara.kasBank.create',
+        'store' => 'bendahara.kasBank.store',
+        'edit' => 'bendahara.kasBank.edit',
+        'update' => 'bendahara.kasBank.update',
+        'destroy' => 'bendahara.kasBank.destroy',
+    ]);
+});
+     
 });
 
 
